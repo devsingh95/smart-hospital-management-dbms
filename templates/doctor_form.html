@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-head" data-reveal>
+    <h2>Doctor Management</h2>
+    <p>Register specialists and consultation charges for appointment and billing modules.</p>
+</section>
+{% if error %}<div class="flash">{{ error }}</div>{% endif %}
+<form method="post" class="form-grid" data-reveal>
+    <input name="first_name" placeholder="First Name" required value="{{ data.first_name if data else '' }}" />
+    <input name="last_name" placeholder="Last Name" required value="{{ data.last_name if data else '' }}" />
+    <input name="specialization" placeholder="Specialization" required value="{{ data.specialization if data else '' }}" />
+    <input name="phone" placeholder="Phone" required value="{{ data.phone if data else '' }}" />
+    <input type="email" name="email" placeholder="Email" value="{{ data.email if data else '' }}" />
+    <input type="number" step="0.01" min="0" name="consultation_fee" placeholder="Consultation Fee" required value="{{ data.consultation_fee if data else '' }}" />
+    <button type="submit" class="btn">Save Doctor</button>
+</form>
+{% endblock %}

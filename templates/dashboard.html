@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-head" data-reveal>
+    <h2>Operations Dashboard</h2>
+    <p>Monitor patients, doctors, appointments, and billing records in one place.</p>
+</section>
+
+<section class="stats-grid" data-reveal>
+    <article class="stat-card">
+        <p class="stat-value">{{ patients|length }}</p>
+        <p class="stat-label">Registered Patients</p>
+    </article>
+    <article class="stat-card">
+        <p class="stat-value">{{ doctors|length }}</p>
+        <p class="stat-label">Doctors Available</p>
+    </article>
+    <article class="stat-card">
+        <p class="stat-value">{{ appointments|length }}</p>
+        <p class="stat-label">Appointments</p>
+    </article>
+    <article class="stat-card">
+        <p class="stat-value">{{ bills|length }}</p>
+        <p class="stat-label">Bills Generated</p>
+    </article>
+</section>
+
+<section class="table-wrap" data-reveal>
+    <h3>Patients</h3>
+    <table>
+        <tr><th>ID</th><th>Name</th><th>Phone</th><th>Blood Group</th></tr>
+        {% for p in patients %}
+        <tr>
+            <td>{{ p.patient_id }}</td>
+            <td>{{ p.first_name }} {{ p.last_name }}</td>
+            <td>{{ p.phone }}</td>
+            <td>{{ p.blood_group }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="table-wrap" data-reveal>
+    <h3>Doctors</h3>
+    <table>
+        <tr><th>ID</th><th>Name</th><th>Specialization</th><th>Fee</th></tr>
+        {% for d in doctors %}
+        <tr>
+            <td>{{ d.doctor_id }}</td>
+            <td>Dr. {{ d.first_name }} {{ d.last_name }}</td>
+            <td>{{ d.specialization }}</td>
+            <td>{{ d.consultation_fee }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="table-wrap" data-reveal>
+    <h3>Appointments</h3>
+    <table>
+        <tr><th>ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th><th>Action</th></tr>
+        {% for a in appointments %}
+        <tr>
+            <td>{{ a.appointment_id }}</td>
+            <td>{{ a.patient_name }}</td>
+            <td>{{ a.doctor_name }}</td>
+            <td>{{ a.appointment_date }}</td>
+            <td>{{ a.appointment_time }}</td>
+            <td><span class="status-chip status-{{ a.status|lower }}">{{ a.status }}</span></td>
+            <td>
+                <form action="{{ url_for('generate_bill_page', appointment_id=a.appointment_id) }}" method="post">
+                    <button class="btn btn-small" type="submit">Generate Bill</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+<section class="table-wrap" data-reveal>
+    <h3>Billing</h3>
+    <table>
+        <tr><th>Bill ID</th><th>Appointment ID</th><th>Date</th><th>Total</th><th>Status</th></tr>
+        {% for b in bills %}
+        <tr>
+            <td>{{ b.bill_id }}</td>
+            <td>{{ b.appointment_id }}</td>
+            <td>{{ b.bill_date }}</td>
+            <td>{{ b.total_amount }}</td>
+            <td><span class="status-chip status-{{ b.payment_status|lower }}">{{ b.payment_status }}</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+{% endblock %}

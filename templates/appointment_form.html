@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-head" data-reveal>
+    <h2>Appointment Booking</h2>
+    <p>Assign patients to doctors and reserve consultation slots with status tracking.</p>
+</section>
+{% if error %}<div class="flash">{{ error }}</div>{% endif %}
+<form method="post" class="form-grid" data-reveal>
+    <select name="patient_id" required>
+        <option value="">Select Patient</option>
+        {% for patient in patients %}
+            <option value="{{ patient.patient_id }}">{{ patient.first_name }} {{ patient.last_name }} (ID: {{ patient.patient_id }})</option>
+        {% endfor %}
+    </select>
+    <select name="doctor_id" required>
+        <option value="">Select Doctor</option>
+        {% for doctor in doctors %}
+            <option value="{{ doctor.doctor_id }}">Dr. {{ doctor.first_name }} {{ doctor.last_name }} - {{ doctor.specialization }}</option>
+        {% endfor %}
+    </select>
+    <input type="date" name="appointment_date" required />
+    <input type="time" name="appointment_time" required />
+    <select name="status" required>
+        <option value="Booked">Booked</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+    </select>
+    <textarea name="reason" placeholder="Reason for appointment" required></textarea>
+    <button type="submit" class="btn">Book Appointment</button>
+</form>
+{% endblock %}

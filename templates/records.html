@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-head" data-reveal>
+    <h2>Medical Records</h2>
+    <p>Review diagnosis and prescriptions linked with patient and doctor details.</p>
+</section>
+<section class="table-wrap" data-reveal>
+    <table>
+        <tr>
+            <th>Record ID</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>Diagnosis</th>
+            <th>Prescription</th>
+            <th>Date</th>
+        </tr>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.record_id }}</td>
+            <td>{{ r.patient_name }}</td>
+            <td>Dr. {{ r.doctor_name }}</td>
+            <td>{{ r.diagnosis }}</td>
+            <td>{{ r.prescription }}</td>
+            <td>{{ r.record_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+{% endblock %}

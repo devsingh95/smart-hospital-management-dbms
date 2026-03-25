@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="page-head" data-reveal>
+    <h2>Patient Registration</h2>
+    <p>Add patient demographics and contact details for appointment and treatment tracking.</p>
+</section>
+{% if error %}<div class="flash">{{ error }}</div>{% endif %}
+<form method="post" class="form-grid" data-reveal>
+    <input name="first_name" placeholder="First Name" required value="{{ data.first_name if data else '' }}" />
+    <input name="last_name" placeholder="Last Name" required value="{{ data.last_name if data else '' }}" />
+    <input type="date" name="dob" required value="{{ data.dob if data else '' }}" />
+    <select name="gender" required>
+        <option value="">Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+    </select>
+    <input name="phone" placeholder="Phone" required value="{{ data.phone if data else '' }}" />
+    <input type="email" name="email" placeholder="Email" value="{{ data.email if data else '' }}" />
+    <input name="blood_group" placeholder="Blood Group (e.g. O+)" value="{{ data.blood_group if data else '' }}" />
+    <textarea name="address" placeholder="Address">{{ data.address if data else '' }}</textarea>
+    <button type="submit" class="btn">Save Patient</button>
+</form>
+{% endblock %}

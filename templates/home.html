@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero" data-reveal>
+    <span class="eyebrow">Smart Hospital Management System</span>
+    <h1>Run Hospital Operations With a Clean DBMS Workflow</h1>
+    <p>
+        Register patients, manage doctors, book appointments, store medical records,
+        and generate billing records from one practical engineering project.
+    </p>
+    <div class="hero-actions">
+        <a class="btn" href="{{ url_for('add_patient_page') }}">Start Patient Intake</a>
+        <a class="btn btn-outline" href="{{ url_for('dashboard') }}">Open Live Dashboard</a>
+    </div>
+</section>
+
+<section class="stats-grid" data-reveal>
+    <article class="stat-card">
+        <p class="stat-value">5</p>
+        <p class="stat-label">Core Modules</p>
+    </article>
+    <article class="stat-card">
+        <p class="stat-value">3NF</p>
+        <p class="stat-label">Normalized Schema</p>
+    </article>
+    <article class="stat-card">
+        <p class="stat-value">1</p>
+        <p class="stat-label">Trigger + Procedure Flow</p>
+    </article>
+</section>
+
+<section class="cards" data-reveal>
+    <article class="card feature-card">
+        <h3>Patient Module</h3>
+        <p>Capture demographic and contact details with validation constraints.</p>
+    </article>
+    <article class="card feature-card">
+        <h3>Appointment Module</h3>
+        <p>Map patients to doctors and track schedule status for each visit.</p>
+    </article>
+    <article class="card feature-card">
+        <h3>Billing Module</h3>
+        <p>Generate auto-bills using trigger and procedure-based business rules.</p>
+    </article>
+</section>
+
+<section class="info-strip" data-reveal>
+    <h3>Real-World Use Case</h3>
+    <p>
+        A receptionist can register a patient, assign a doctor appointment, and let the system generate
+        bill entries automatically after consultation completion.
+    </p>
+</section>
+{% endblock %}
